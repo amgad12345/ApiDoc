@@ -21,7 +21,7 @@ namespace ApiDoc.Controllers
     }
 
 
-    [HttpGet("getdoc/{id}")]
+    [HttpGet("getdoc-appointmen/{id}")]
     public ActionResult GetOneDoctor2(int id)
     {
       var db = new DatabaseContext();
@@ -59,8 +59,8 @@ namespace ApiDoc.Controllers
 
 
 
-    [HttpGet("getdent/{type}")]
-    public ActionResult GetDentists(string type)
+    [HttpGet("gettype/{type}")]
+    public ActionResult GetByType(string type)
     {
       var db = new DatabaseContext();
       var doctors = db.Doctors.Where(it => it.Type == type);
@@ -91,7 +91,7 @@ namespace ApiDoc.Controllers
 
     [HttpPost]
     public ActionResult CreateDoctor(Doctor doctor)
-    {
+    { 
       var db = new DatabaseContext();
       doctor.Id = 0;
       db.Doctors.Add(doctor);
