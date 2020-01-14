@@ -9,6 +9,9 @@ namespace ApiDoc.Models
   {
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<AppointmentForm> AppointmentForms { get; set; }
+    
+     public DbSet<User> Users { get; set; }
+
     private string ConvertPostConnectionToConnectionString(string connection)
     {
       var _connection = connection.Replace("postgres://", String.Empty);
