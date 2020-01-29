@@ -67,7 +67,7 @@ namespace ApiDoc.Controllers
     [HttpPost("login")]
     public async Task<ActionResult> LoginUser(LoginViewModel loginData)
     {
-      var user = await this.db.Users.FirstOrDefaultAsync(f => f.FirstName == loginData.FirstName);
+      var user = await this.db.Users.FirstOrDefaultAsync(f => f.Email == loginData.Email);
       if (user == null)
       {
         return BadRequest(new { Message = "User does not exist" });

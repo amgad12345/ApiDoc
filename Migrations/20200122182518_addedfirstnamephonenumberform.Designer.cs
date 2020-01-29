@@ -3,15 +3,17 @@ using System;
 using ApiDoc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ApiDoc.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200122182518_addedfirstnamephonenumberform")]
+    partial class addedfirstnamephonenumberform
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,22 +94,16 @@ namespace ApiDoc.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("HashedPassword")
                         .HasColumnType("text");
+
+                    b.Property<int>("Iddoc")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProfileUrl")
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
 
                     b.ToTable("DoctorAdmins");
                 });
@@ -144,15 +140,6 @@ namespace ApiDoc.Migrations
                 {
                     b.HasOne("ApiDoc.Models.Doctor", "Doctor")
                         .WithMany("AppointmentForms")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ApiDoc.Models.DoctorAdmin", b =>
-                {
-                    b.HasOne("ApiDoc.Models.Doctor", "Doctor")
-                        .WithMany()
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

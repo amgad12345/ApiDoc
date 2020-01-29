@@ -9,7 +9,7 @@ namespace ApiDoc.Models
   {
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<AppointmentForm> AppointmentForms { get; set; }
-    
+    public DbSet<DoctorAdmin> DoctorAdmins { get; set; }
      public DbSet<User> Users { get; set; }
 
     private string ConvertPostConnectionToConnectionString(string connection)

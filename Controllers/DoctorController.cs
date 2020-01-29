@@ -26,6 +26,7 @@ namespace ApiDoc.Controllers
     {
       var db = new DatabaseContext();
       var doctor = db.Doctors.Include(i => i.AppointmentForms).FirstOrDefault(dr => dr.Id == id);
+       
       if (doctor == null)
       {
         return NotFound();
@@ -46,6 +47,8 @@ namespace ApiDoc.Controllers
           {
             AppointmentDate = af.AppointmentDate,
             LastNanme = af.LastNanme,
+            FirstNanme = af.FirstNanme,
+            PhoneNumber = af.PhoneNumber,
             Discription = af.Discription,
             Email = af.Email,
             DoctorId = af.DoctorId,
@@ -53,6 +56,7 @@ namespace ApiDoc.Controllers
           }).ToList()
         };
         return Ok(rv);
+       
       }
     }
 
@@ -122,7 +126,7 @@ namespace ApiDoc.Controllers
     }
 
     [HttpDelete("{id}")]
-    public ActionResult DeleteStudent(int id)
+    public ActionResult DeleteDoctor(int id)
     {
       var db = new DatabaseContext();
       var doctor = db.Doctors.FirstOrDefault(st => st.Id == id);

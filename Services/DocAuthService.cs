@@ -7,9 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ApiDoc.Services
 {
-  public class AuthService
+  public class DocAuthService
   {
-    public AuthenticatedData CreateToken(Models.User user)
+    public DocAuthenticatedData CreateToken(Models.DoctorAdmin duser)
     {
       var expirationTime = DateTime.UtcNow.AddHours(10);
 
@@ -17,7 +17,7 @@ namespace ApiDoc.Services
       {
         Subject = new ClaimsIdentity(new[]
         {
-            new Claim("id", user.Id.ToString()),
+            new Claim("id", duser.Id.ToString()),
       }),
         Expires = expirationTime,
         SigningCredentials = new SigningCredentials(
@@ -27,14 +27,14 @@ namespace ApiDoc.Services
       };
       var tokenHandler = new JwtSecurityTokenHandler();
       var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-      return new AuthenticatedData
+      return new DocAuthenticatedData
       {
 
-        Email= user.Email  , 
-        FirstName = user.FirstName,
-        LastName = user.LastName,
+       // Iddoc= duser.Iddoc,
+        Username= duser.Username, 
         Token = token,
-        UserId = user.Id,
+        DoctorId=duser.DoctorId, 
+        UserId = duser.Id,
         ExpirationTime = expirationTime
       };
     }
